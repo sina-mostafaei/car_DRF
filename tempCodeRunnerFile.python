@@ -1,0 +1,8 @@
+TEACHERS_CHOICES = [
+    ["Mostafaei", "mostafaei"],
+    ["nasiri", "nasiri"],
+    ["gholizade", "gholizade"],
+]
+t="nasiri"
+if t in TEACHERS_CHOICES:
+    print("yes")

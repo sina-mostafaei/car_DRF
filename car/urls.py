@@ -1,8 +1,9 @@
 from django.urls import path
 from .views import *
 urlpatterns = [
-    path('pr', pw),
-    path('cr', cw),
-    path('info', infu),
-    path('add_frim', frim_adder),
+    path('pr', person_view),
+    path('cr', car_view),
+    path('info', car_info),
+    path('add_frim', firm_adder),
+
 ]

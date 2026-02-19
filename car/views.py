@@ -2,17 +2,17 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from .models import Car, Person, Firm
-from .serializers import per_ser, car_ser, frim_ser, infouw, inpho
+from .serializers import person_serializer, car_serializer, firm_serializer, car_info_serializer, firm_info_serializr
 
 
 @api_view(["GET", "POST"])
 def person_view(r):
     if r.method == "GET":
         persons = Person.objects.all()
-        prsr = per_ser(persons, many=True)
+        prsr = person_serializer(persons, many=True)
         return Response(prsr.data, status=status.HTTP_200_OK)
     elif r.method == "POST":
-        ser = per_ser(data=r.data)
+        ser = person_serializer(data=r.data)
         if ser.is_valid():
             ser.save()
             return Response(ser.data, status=status.HTTP_201_CREATED)
@@ -27,10 +27,10 @@ def person_view(r):
 def car_view(r):
     if r.method == "GET":
         cars = Car.objects.all()
-        crsr = car_ser(cars, many=True)
+        crsr = car_serializer(cars, many=True)
         return Response(crsr.data, status=status.HTTP_200_OK)
     elif r.method == "POST":
-        ser = car_ser(data=r.data)
+        ser = car_serializer(data=r.data)
         if ser.is_valid():
             ser.save()
             return Response(ser.data, status=status.HTTP_201_CREATED)
@@ -43,13 +43,13 @@ def car_view(r):
 @api_view(["GET"])
 def car_info(r):
     cars = Car.objects.all()
-    crsr = infouw(cars, many=True)
+    crsr = car_info_serializer(cars, many=True)
     return Response(crsr.data, status=status.HTTP_200_OK)
 
 
 @api_view(["POST"])
 def firm_adder(r):
-    ser = frim_ser(data=r.data)
+    ser = firm_serializer(data=r.data)
     if ser.is_valid():
         ser.save()
         return Response(ser.data, status=status.HTTP_201_CREATED)
@@ -60,5 +60,5 @@ def firm_adder(r):
 @api_view(["GET"])
 def firm_info(r):
     firms = Car.objects.all()
-    frms_sr = inpho(firms, many=True)
+    frms_sr = firm_info_serializr(firms, many=True)
     return Response(frms_sr.data, status=status.HTTP_200_OK)

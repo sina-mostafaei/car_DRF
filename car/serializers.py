@@ -14,11 +14,7 @@ class car_serializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class car_info_serializer(serializers.ModelSerializer):
-    class Meta:
-        model = m.Car
-        fields = "__all__"
-        depth = 1
+        
 
 
 class firm_serializer(serializers.ModelSerializer):
@@ -28,7 +24,16 @@ class firm_serializer(serializers.ModelSerializer):
 
 
 class firm_info_serializr(serializers.ModelSerializer):
+    
     class Meta:
         model = m.Firm
         fields = "__all__"
-        depth = 1
+
+        
+
+class car_info_serializer(serializers.ModelSerializer):
+    class Meta:
+        model = m.Car
+        fields = "__all__"
+    owner=person_serializer(read_only=True)
+    store=firm_serializer(read_only=True)

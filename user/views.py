@@ -5,6 +5,9 @@ from rest_framework.permissions import AllowAny ,IsAuthenticated
 from .serializers import user_serializer
 from django.contrib.auth.models import User
 from .permissions import is_owner
+
+
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def create_user(r):
@@ -14,6 +17,10 @@ def create_user(r):
         return Response(ser.data,status=status.HTTP_200_OK)
     else:
         return Response(ser.errors,status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
 
 @api_view(['get'])
 @permission_classes([IsAuthenticated,is_owner])
@@ -25,3 +32,4 @@ def profile(r):
     else:
         ser=user_serializer(user)
         return Response(ser.data,status=status.HTTP_200_OK)
+

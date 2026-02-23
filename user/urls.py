@@ -1,6 +1,12 @@
 from django.urls import path
-from user import views
+from .views import *
+from rest_framework.routers import DefaultRouter
+router = DefaultRouter()
+router.register("", create_user, basename="temp1")
+
 urlpatterns = [
-    path('',views.create_user),
-    path('profile/',views.profile)
+    path('profile/', profile)
 ]
+
+
+urlpatterns += router.urls
